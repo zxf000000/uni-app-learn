@@ -167,11 +167,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      title: '测试小程序' };
+      title: '测试小程序',
+      month: '' };
 
   },
   onLoad: function onLoad() {
@@ -180,6 +186,10 @@ var _default =
   methods: {
     change: function change(value) {
       console.log('change', value);
+    },
+    monthChanged: function monthChanged(value) {
+      console.log(value);
+      this.month = value.month.monthStart.year() + "/" + (value.month.monthStart.month() + 1);
     } } };exports.default = _default;
 
 /***/ }),

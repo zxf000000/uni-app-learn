@@ -1,5 +1,10 @@
 <template>
 	<view>
+		<view class="calendar-header">
+			<view class="week-item" v-for="item in weekdays" :key="item">
+				<text>{{item}}</text>
+			</view>
+		</view>
 		<swiper
 			:indicator-dots="false"
 			:circular="true"
@@ -10,9 +15,10 @@
 				<view class="calendar-month">
 					<text class="month-text">{{item.monthStart.year()}} {{item.monthStart.month() + 1}}</text>
 					<view class="days-list">
-						<button class="days-item" v-for="day in item.days" plain>
+						<day-item class="days-item" v-for="day in item.days" :item="day"></day-item>
+<!-- 						<button class="days-item" v-for="day in item.days" plain>
 							<text class="day-text" :class="{gray: !day.currentMonth}">{{day.n.cDay}}</text>
-						</button>
+						</button> -->
 					</view>
 				</view>
 			</swiper-item>
@@ -23,8 +29,10 @@
 <script>
 	import Vue from 'vue';
 	import calendarHelper from './calendar_helper.js'
+	import DayItem from './day-item.vue'
 	export default {
 		name:"calendar",
+		components: {DayItem},
 		data() {
 			return {
 				items: [
@@ -36,6 +44,15 @@
 					
 				],
 				lastPage: 0,
+				weekdays: [
+					"Sun",
+					"Mon",
+					"Tue",
+					"Wen",
+					"Thu",
+					"Fri",
+					"Sat"
+				]
 			};
 		},
 		methods: {
@@ -50,6 +67,7 @@
 					this.addPreData();
 				}
 				this.lastPage = currentPage;
+				this.$emit('didChangeMonth', {month: this.datas[this.lastPage]});
 			},
 			addPreData() {
 				const data = this.datas[this.lastPage];
@@ -75,9 +93,10 @@
 				const centerData = calendarHelper.getMonthDays();
 				const lastMonthDays = calendarHelper.getMonthDays(centerData.monthStart.subtract(1, 'month'));
 				const nextMonthDays = calendarHelper.getMonthDays(centerData.monthStart.add(1, 'month'));
-				console.log(centerData.monthStart);
 				this.datas = [centerData,nextMonthDays, lastMonthDays];
-				console.log(this.datas);
+				
+				// 初始化一下, 防止外部没有值
+				this.$emit('didChangeMonth', {month: this.datas[this.lastPage]});
 			}
 		},
 		mounted() {
@@ -88,9 +107,22 @@
 
 <style lang="scss" scoped>
 
+
+.calendar-header {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(14.1%, 14.2%));
+	.week-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: red;
+		color: white;
+	}
+}
+
 .swiper-wrapper {
 	width: 100%;
-	height: 600rpx;
+	height: 700rpx;
 }
 
 .calendar-page {
@@ -126,7 +158,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 80rpx;
+		height: 100rpx;
 		&.button-hover {
 			background-color: yellow;
 		}

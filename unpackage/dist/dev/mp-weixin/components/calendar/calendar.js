@@ -81,7 +81,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.datas, function(item, __i0__) {
+  var l0 = _vm.__map(_vm.datas, function(item, __i1__) {
     var $orig = _vm.__get_orig(item)
 
     var g0 = item.monthStart.year()
@@ -157,6 +157,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _calendar_helper = _interopRequireDefault(__webpack_require__(/*! ./calendar_helper.js */ 32));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -180,12 +186,24 @@ var _calendar_helper = _interopRequireDefault(__webpack_require__(/*! ./calendar
 //
 //
 //
-var _default = { name: "calendar", data: function data() {return { items: [{ name: '1' }, { name: '2' }, { name: '3' }], datas: [], lastPage: 0 };}, methods: { pageChange: function pageChange(event) {var currentPage = event.detail.current;if (currentPage === this.lastPage) {return;}if (currentPage - this.lastPage === 1 || currentPage - this.lastPage === -2) {
+//
+//
+//
+//
+//
+//
+var DayItem = function DayItem() {__webpack_require__.e(/*! require.ensure | components/calendar/day-item */ "components/calendar/day-item").then((function () {return resolve(__webpack_require__(/*! ./day-item.vue */ 42));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { name: "calendar", components: { DayItem: DayItem }, data: function data() {return { items: [{ name: '1' }, { name: '2' }, { name: '3' }], datas: [], lastPage: 0, weekdays: ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"] };}, methods: { pageChange: function pageChange(event) {
+      var currentPage = event.detail.current;
+      if (currentPage === this.lastPage) {
+        return;
+      }
+      if (currentPage - this.lastPage === 1 || currentPage - this.lastPage === -2) {
         this.addNextData();
       } else {
         this.addPreData();
       }
       this.lastPage = currentPage;
+      this.$emit('didChangeMonth', { month: this.datas[this.lastPage] });
     },
     addPreData: function addPreData() {
       var data = this.datas[this.lastPage];
@@ -211,9 +229,10 @@ var _default = { name: "calendar", data: function data() {return { items: [{ nam
       var centerData = _calendar_helper.default.getMonthDays();
       var lastMonthDays = _calendar_helper.default.getMonthDays(centerData.monthStart.subtract(1, 'month'));
       var nextMonthDays = _calendar_helper.default.getMonthDays(centerData.monthStart.add(1, 'month'));
-      console.log(centerData.monthStart);
       this.datas = [centerData, nextMonthDays, lastMonthDays];
-      console.log(this.datas);
+
+      // 初始化一下, 防止外部没有值
+      this.$emit('didChangeMonth', { month: this.datas[this.lastPage] });
     } },
 
   mounted: function mounted() {

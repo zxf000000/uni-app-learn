@@ -1,7 +1,12 @@
 <template>
 	<view class="content">
-		<text id="title">日历</text>
-		<calendar class="calendar"></calendar>
+		<view class="home-header">
+			<text id="title">日历</text>
+			<text id="month">{{month}}</text>
+		</view>
+		<calendar
+			@didChangeMonth="monthChanged"
+			class="calendar"></calendar>
 	</view>
 </template>
 
@@ -9,15 +14,20 @@
 	export default {
 		data() {
 			return {
-				title: '测试小程序'
+				title: '测试小程序',
+				month: ''
 			}
 		},
 		onLoad() {
-
+					
 		},
 		methods: {
 			change(value) {
 				console.log('change', value);
+			},
+			monthChanged(value) {
+				console.log(value);
+				this.month = value.month.monthStart.year() + "/" + (value.month.monthStart.month() + 1);
 			}
 		}
 	}
@@ -29,6 +39,12 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: center;
+		.home-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20rpx;
+		}
 		.calendar {
 			width: 100%;
 		}

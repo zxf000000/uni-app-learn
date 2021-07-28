@@ -24,9 +24,26 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.calendar-header.data-v-b14ca078 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14.1%, 14.2%));
+}
+.calendar-header .week-item.data-v-b14ca078 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  background-color: red;
+  color: white;
+}
 .swiper-wrapper.data-v-b14ca078 {
   width: 100%;
-  height: 600rpx;
+  height: 700rpx;
 }
 .calendar-page.data-v-b14ca078 {
   width: 100%;
@@ -70,7 +87,7 @@
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  height: 80rpx;
+  height: 100rpx;
 }
 .days-list .days-item.button-hover.data-v-b14ca078 {
   background-color: yellow;
