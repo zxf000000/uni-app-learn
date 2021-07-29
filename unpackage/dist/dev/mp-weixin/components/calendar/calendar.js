@@ -192,7 +192,13 @@ var _calendar_helper = _interopRequireDefault(__webpack_require__(/*! ./calendar
 //
 //
 //
-var DayItem = function DayItem() {__webpack_require__.e(/*! require.ensure | components/calendar/day-item */ "components/calendar/day-item").then((function () {return resolve(__webpack_require__(/*! ./day-item.vue */ 42));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { name: "calendar", components: { DayItem: DayItem }, data: function data() {return { items: [{ name: '1' }, { name: '2' }, { name: '3' }], datas: [], lastPage: 0, weekdays: ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"] };}, methods: { pageChange: function pageChange(event) {
+var DayItem = function DayItem() {__webpack_require__.e(/*! require.ensure | components/calendar/day-item */ "components/calendar/day-item").then((function () {return resolve(__webpack_require__(/*! ./day-item.vue */ 42));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { name: "calendar", components: { DayItem: DayItem }, data: function data() {return { items: [{ name: '1' }, { name: '2' }, { name: '3' }], datas: [], lastPage: 0, weekdays: ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"], selectedIndex: null };}, methods: {
+    didSelect: function didSelect(day) {
+      this.$emit('didSelect', day);
+      this.selectedIndex = day.value;
+      console.log(day.value);
+    },
+    pageChange: function pageChange(event) {
       var currentPage = event.detail.current;
       if (currentPage === this.lastPage) {
         return;

@@ -25,11 +25,11 @@
 /* 透明度 */
 /* 文章场景相关 */
 .day-item.data-v-154ee7ac {
-  background-color: black;
-}
-.day-item .day-item-button.data-v-154ee7ac {
   padding: 0;
-  background: black;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
   color: white;
   display: -webkit-box;
   display: -webkit-flex;
@@ -45,21 +45,24 @@
   -webkit-justify-content: flex-start;
           justify-content: flex-start;
 }
-.day-item .day-item-button .day-text.data-v-154ee7ac {
+.day-item.selected.data-v-154ee7ac {
+  background-color: #4CD964;
+}
+.day-item .day-text.data-v-154ee7ac {
   color: white;
   font-size: 30rpx;
   margin: 0;
   padding: 0;
   line-height: 35rpx;
 }
-.day-item .day-item-button .n-text.data-v-154ee7ac {
+.day-item .n-text.data-v-154ee7ac {
   color: #F1F1F1;
   font-size: 28rpx;
   margin: 0;
   padding: 0;
   line-height: 33rpx;
 }
-.day-item .day-item-button .event-dot.data-v-154ee7ac {
+.day-item .event-dot.data-v-154ee7ac {
   width: 10rpx;
   height: 10rpx;
   background-color: red;

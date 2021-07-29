@@ -74,6 +74,7 @@
 .days-list.data-v-b14ca078 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14.1%, 14.2%));
+  grid-gap: 0;
   width: 100%;
 }
 .days-list .days-item.data-v-b14ca078 {
@@ -87,6 +88,8 @@
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
+  padding: 0;
+  margin: 0;
   height: 100rpx;
 }
 .days-list .days-item.button-hover.data-v-b14ca078 {

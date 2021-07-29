@@ -1,13 +1,12 @@
 <template>
-	<view class="day-item">
-		<button class="day-item-button"
-			:style="itemStyle"
-		  @click="tapItem">
+	<view 
+		class="day-item" 
+		@click="tapItem"
+		:class="{'selected': selected}"
+		>
 			<text class="day-text">{{item.n.cDay}}</text>
 			<text class="n-text">{{item.n.IDayCn === "初一" ? item.n.IMonthCn : item.n.IDayCn}}</text>
-			<view class="event-dot" v-if="Object.keys(item.event).length > 0">
-			</view>
-		</button>
+			<view class="event-dot" v-if="Object.keys(item.event).length > 0"> </view>
 	</view>
 </template>
 
@@ -51,15 +50,20 @@
 
 <style scoped lang="scss">
 	.day-item {
-		background-color: black;
-		.day-item-button {
-			padding: 0;
-			background: black;
-			color: white;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: flex-start;
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		background: transparent;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		&.selected {
+			background-color: #4CD964;
+		}
+
 			.day-text {
 				color: white;
 				font-size: 30rpx;
@@ -80,6 +84,6 @@
 				background-color: red;
 				border-radius: 10rpx;
 			}
-		}
+		
 	}
 </style>

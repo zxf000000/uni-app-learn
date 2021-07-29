@@ -15,10 +15,10 @@
 				<view class="calendar-month">
 					<text class="month-text">{{item.monthStart.year()}} {{item.monthStart.month() + 1}}</text>
 					<view class="days-list">
-						<day-item class="days-item" v-for="day in item.days" :item="day"></day-item>
-<!-- 						<button class="days-item" v-for="day in item.days" plain>
-							<text class="day-text" :class="{gray: !day.currentMonth}">{{day.n.cDay}}</text>
-						</button> -->
+						<day-item
+							:selected="day.y === selectedIndex.y"
+							@select="didSelect"
+							class="days-item" v-for="day in item.days" :item="day"></day-item>
 					</view>
 				</view>
 			</swiper-item>
@@ -52,10 +52,16 @@
 					"Thu",
 					"Fri",
 					"Sat"
-				]
+				],
+				selectedIndex: null,
 			};
 		},
 		methods: {
+			didSelect(day) {
+				this.$emit('didSelect', day);
+				this.selectedIndex = day.value;
+				console.log(day.value);
+			},
 			pageChange(event) {
 				const currentPage = event.detail.current;
 				if (currentPage === this.lastPage) {
@@ -152,12 +158,15 @@
 .days-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(14.1%, 14.2%));
+	grid-gap: 0;
 	width: 100%;
 	.days-item {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding: 0;
+		margin: 0;
 		height: 100rpx;
 		&.button-hover {
 			background-color: yellow;
